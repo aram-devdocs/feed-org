@@ -16,7 +16,9 @@ export default function Index() {
    */
   return (
     <>
-      <Typography>Feed me</Typography>
+      <Typography>Feed me2</Typography>
     </>
   );
 }
+
+

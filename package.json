@@ -2,7 +2,9 @@
   "name": "@feed-org/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "npx nx run feed-org:dev"
+  },
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.4",

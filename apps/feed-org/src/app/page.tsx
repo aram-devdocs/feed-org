@@ -1,6 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
+import { Typography } from '@feed-org/design-system';
 
 const StyledPage = styled.div`
   .page {
@@ -13,5 +14,9 @@ export default function Index() {
    *
    * Note: The corresponding styles are in the ./index.styled-components file.
    */
-  return <></>;
+  return (
+    <>
+      <Typography>Feed me</Typography>
+    </>
+  );
 }

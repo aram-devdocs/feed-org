@@ -1,6 +1,10 @@
-"use client"
+'use client';
 
-import { CreateFamilyForm, CreateMemberForm } from '../components';
+import {
+  CreateFamilyForm,
+  CreateMemberForm,
+  CreateRecipeForm,
+} from '../components';
 import { useCreate } from '../hooks';
 import { family } from '@prisma/client';
 import { Container } from '@feed-org/design-system';
@@ -17,6 +21,10 @@ export const CreatePage = ({
     <Container>
       <CreateFamilyForm onSubmit={createFamily} />
       <CreateMemberForm onSubmit={createMember} families={families} />
+      <CreateRecipeForm
+        onSubmit={(data) => console.log(data)}
+        ingredients={[]}
+      />
     </Container>
   );
 };

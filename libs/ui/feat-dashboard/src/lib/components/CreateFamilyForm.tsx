@@ -9,41 +9,43 @@ import {
 } from '@feed-org/design-system';
 import { Prisma } from '@prisma/client';
 
-export const CreateFamilyForm = React.memo(() => {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Prisma.familyCreateInput>({
-    resolver: genericResolver<Prisma.familyCreateInput>({
-      name: String,
-    }),
-  });
+export interface CreateFamilyFormProps {
+  onSubmit: (data: Prisma.familyCreateInput) => void;
+}
 
-  const onSubmit = useCallback((data: Prisma.familyCreateInput) => {
-    console.log(data);
-  }, []);
+export const CreateFamilyForm = React.memo(
+  ({ onSubmit }: CreateFamilyFormProps) => {
+    const {
+      control,
+      handleSubmit,
+      formState: { errors },
+    } = useForm<Prisma.familyCreateInput>({
+      resolver: genericResolver<Prisma.familyCreateInput>({
+        name: String,
+      }),
+    });
 
-  return (
-    <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="name"
-          control={control}
-          defaultValue=""
-          rules={{ required: 'Name is required' }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Name"
-              variant="outlined"
-              error={!!errors.name}
-              helperText={errors.name?.message}
-            />
-          )}
-        />
-        <Button type="submit">Create Family</Button>
-      </Form>
-    </Container>
-  );
-});
+    return (
+      <Container>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="name"
+            control={control}
+            defaultValue=""
+            rules={{ required: 'Name is required' }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="Name"
+                variant="outlined"
+                error={!!errors.name}
+                helperText={errors.name?.message}
+              />
+            )}
+          />
+          <Button type="submit">Create Family</Button>
+        </Form>
+      </Container>
+    );
+  }
+);

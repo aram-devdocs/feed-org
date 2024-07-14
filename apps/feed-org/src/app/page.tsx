@@ -1,13 +1,5 @@
 'use client';
 
-import styled from 'styled-components';
-import { Typography } from '@feed-org/design-system';
-
-const StyledPage = styled.div`
-  .page {
-  }
-`;
-
 export default function Index() {
   /*
    * Replace the elements below with your own.
@@ -16,9 +8,7 @@ export default function Index() {
    */
   return (
     <>
-      <Typography>Feed me2</Typography>
+      <div>Feed me2</div>
     </>
   );
 }
-
-

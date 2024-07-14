@@ -16,12 +16,35 @@ datasource db {
 }
 
 model family {
-  family_id String @id @default(uuid()) @map("family_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
+  family_id String   @id @default(uuid()) @map("family_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
   name      String
+  members   member[]
+  recipes   recipe[]
 }
 
 model member {
-  member_id String @id @default(uuid()) @map("member_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
+  member_id String   @id @default(uuid()) @map("member_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
   username  String
-  family_id String @map("family_id") @db.VarChar(36)
+  family_id String   @map("family_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
+  family    family   @relation(fields: [family_id], references: [family_id])
+  recipes   recipe[]
+}
+
+model recipe {
+  recipe_id    String       @id @default(uuid()) @map("recipe_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
+  name         String
+  ingredients  ingredient[]
+  instructions String[]
+  family_id    String       @map("family_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
+  family       family       @relation(fields: [family_id], references: [family_id])
+  member_id    String       @map("member_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
+  member       member       @relation(fields: [member_id], references: [member_id])
+}
+
+model ingredient {
+  ingredient_id String @id @default(uuid()) @map("ingredient_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
+  name          String
+  amount        String
+  recipe_id     String @map("recipe_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
+  recipe        recipe @relation(fields: [recipe_id], references: [recipe_id])
 }

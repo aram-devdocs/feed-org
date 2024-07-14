@@ -1,7 +1,9 @@
 'use client';
 
 import { CreateFamilyForm } from '../components';
+import { useFamily } from '../hooks';
 
 export const CreatePage = () => {
-  return <CreateFamilyForm />;
+  const { createFamily } = useFamily();
+  return <CreateFamilyForm onSubmit={createFamily} />;
 };

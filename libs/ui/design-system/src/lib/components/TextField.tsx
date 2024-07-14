@@ -1,4 +1,4 @@
-import { TextField as TF } from '@mui/material';
+import { TextField as TF } from '../core';
 import styled from 'styled-components';
 
 export const TextField = styled(TF)`

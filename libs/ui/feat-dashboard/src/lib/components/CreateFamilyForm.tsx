@@ -1,11 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {
   Button,
   Container,
   TextField,
   Form,
-  genericResolver,
 } from '@feed-org/design-system';
 import { Prisma } from '@prisma/client';
 
@@ -20,9 +19,24 @@ export const CreateFamilyForm = React.memo(
       handleSubmit,
       formState: { errors },
     } = useForm<Prisma.familyCreateInput>({
-      resolver: genericResolver<Prisma.familyCreateInput>({
-        name: String,
-      }),
+      // TODO - add resolver library linked to Prisma
+      resolver: (data: Prisma.familyCreateInput) => {
+        if (!data.name) {
+          return {
+            values: {},
+            errors: {
+              name: {
+                type: 'required',
+                message: 'Name is required',
+              },
+            },
+          };
+        }
+        return {
+          values: data,
+          errors: {},
+        };
+      },
     });
 
     return (

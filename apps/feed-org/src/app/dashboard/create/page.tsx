@@ -1,9 +1,7 @@
-'use client';
-
 import { CreatePage } from '@feed-org/feat-dashboard';
+import { familyResolver } from '@feed-org/data-access';
 
-const CreateFamilyPage = () => {
-  return <CreatePage />;
-};
-
-export default CreateFamilyPage;
+export default async function CreateFamilyPage() {
+  const server_families = await familyResolver.Query.families();
+  return <CreatePage server_families={server_families} />;
+}

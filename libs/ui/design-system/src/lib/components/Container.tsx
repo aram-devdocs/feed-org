@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box }  from '../core';
 import styled from 'styled-components';
 
 export const Container = styled(Box)`

@@ -1,4 +1,4 @@
-import { Button as B } from '@mui/material';
+import { Button as B }  from '../core';
 import styled from 'styled-components';
 
 export const Button = styled(B)`

@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "npx nx run feed-org:dev",
-    "vercel-build": "nx run feed-org:build"
+    "vercel-build": "nx run feed-org:build --skip-nx-cache"
   },
   "private": true,
   "dependencies": {

@@ -18,6 +18,7 @@
       "@feed-org/data-access": ["libs/data-access/src/index.ts"],
       "@feed-org/design-system": ["libs/ui/design-system/src/index.ts"],
       "@feed-org/feat-auth": ["libs/ui/feat-auth/src/index.ts"],
+      "@feed-org/feat-dashboard": ["libs/ui/feat-dashboard/src/index.ts"],
       "@feed-org/types": ["libs/types/src/index.ts"]
     }
   },

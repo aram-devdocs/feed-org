@@ -1,3 +1,5 @@
+'use client';
+
 import { LoginForm } from '../components';
 import { useLogin } from '../hooks';
 

@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../../../node_modules/.prisma/client"
+}
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model family {
+  family_id String @id @default(uuid()) @map("family_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
+  name      String
+}
+
+model member {
+  member_id String @id @default(uuid()) @map("member_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
+  username  String
+  family_id String @map("family_id") @db.VarChar(36)
+}

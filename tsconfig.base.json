@@ -15,9 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@feed-org/data-access": ["libs/data-access/src/index.ts"],
       "@feed-org/design-system": ["libs/ui/design-system/src/index.ts"],
       "@feed-org/feat-auth": ["libs/ui/feat-auth/src/index.ts"],
-      "@feed-org/types": ["libs/types/src/index.ts"],
+      "@feed-org/types": ["libs/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

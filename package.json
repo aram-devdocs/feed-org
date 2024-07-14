@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "npx nx run feed-org:dev",
-    "vercel-build": "npm run prisma:migrate && echo 'y' && echo $(date +%s) && npm run prisma:generate && nx run feed-org:build --skip-nx-cache",
+    "vercel-build": "npx prisma migrate dev --schema=libs/data-access/src/lib/prisma/schema.prisma --name $(date +%s) && npm run prisma:generate && nx run feed-org:build --skip-nx-cache",
     "docker:start": "docker-compose -f infrastructure/docker-compose.postgres.yml up -d",
     "docker:stop": "docker-compose -f infrastructure/docker-compose.postgres.yml down",
     "prisma:migrate": "echo 'WARNING: This will potentially drop columns. Are you sure you want to run this? Use `npm run prisma:migrate:create-only` to generate the file before running to avoid data loss. (y/n)' && read -r && [[ $REPLY == 'y' ]] && npx prisma migrate dev --schema=libs/data-access/src/lib/prisma/schema.prisma",

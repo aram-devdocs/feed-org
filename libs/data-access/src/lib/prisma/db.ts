@@ -1,4 +1,3 @@
-import { PrismaClient, Prisma as P } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 export const prisma = new PrismaClient();
-export const Prisma = P;

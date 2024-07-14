@@ -1,39 +1,60 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { FamilyService } from '../services';
 import { Prisma } from '@prisma/client';
 
 export const FamilyController = {
-  getAllFamilies: async (req: NextApiRequest, res: NextApiResponse) => {
+  getAllFamilies: async (req: NextRequest) => {
     const families = await FamilyService.getAllFamilies();
-    res.status(200).json(families);
+    return NextResponse.json(families);
   },
 
-  getFamily: async (req: NextApiRequest, res: NextApiResponse) => {
-    const { id } = req.query;
-    const family = await FamilyService.getFamily(id as string);
+  getFamily: async (req: NextRequest) => {
+    const id = req.nextUrl.pathname.split('/').pop();
+    if (!id) {
+      return NextResponse.json(
+        { message: 'Family ID is required' },
+        { status: 400 }
+      );
+    }
+    const family = await FamilyService.getFamily(id);
     if (family) {
-      res.status(200).json(family);
+      return NextResponse.json(family);
     } else {
-      res.status(404).json({ message: 'Family not found' });
+      return NextResponse.json(
+        { message: 'Family not found' },
+        { status: 404 }
+      );
     }
   },
 
-  createFamily: async (req: NextApiRequest, res: NextApiResponse) => {
-    const data: Prisma.familyCreateInput = req.body;
+  createFamily: async (req: NextRequest) => {
+    const data: Prisma.familyCreateInput = await req.json();
     const family = await FamilyService.createFamily(data);
-    res.status(201).json(family);
+    return NextResponse.json(family, { status: 201 });
   },
 
-  updateFamily: async (req: NextApiRequest, res: NextApiResponse) => {
-    const { id } = req.query;
-    const data: Prisma.familyUpdateInput = req.body;
-    const family = await FamilyService.updateFamily(id as string, data);
-    res.status(200).json(family);
+  updateFamily: async (req: NextRequest) => {
+    const id = req.nextUrl.pathname.split('/').pop();
+    if (!id) {
+      return NextResponse.json(
+        { message: 'Family ID is required' },
+        { status: 400 }
+      );
+    }
+    const data: Prisma.familyUpdateInput = await req.json();
+    const family = await FamilyService.updateFamily(id, data);
+    return NextResponse.json(family);
   },
 
-  deleteFamily: async (req: NextApiRequest, res: NextApiResponse) => {
-    const { id } = req.query;
-    const family = await FamilyService.deleteFamily(id as string);
-    res.status(200).json(family);
-  }
+  deleteFamily: async (req: NextRequest) => {
+    const id = req.nextUrl.pathname.split('/').pop();
+    if (!id) {
+      return NextResponse.json(
+        { message: 'Family ID is required' },
+        { status: 400 }
+      );
+    }
+    const family = await FamilyService.deleteFamily(id);
+    return NextResponse.json(family);
+  },
 };

@@ -1,39 +1,60 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { MemberService } from '../services';
 import { Prisma } from '@prisma/client';
 
 export const MemberController = {
-  getAllMembers: async (req: NextApiRequest, res: NextApiResponse) => {
+  getAllMembers: async (req: NextRequest) => {
     const members = await MemberService.getAllMembers();
-    res.status(200).json(members);
+    return NextResponse.json(members);
   },
 
-  getMember: async (req: NextApiRequest, res: NextApiResponse) => {
-    const { id } = req.query;
-    const member = await MemberService.getMember(id as string);
+  getMember: async (req: NextRequest) => {
+    const id = req.nextUrl.pathname.split('/').pop();
+    if (!id) {
+      return NextResponse.json(
+        { message: 'Member ID is required' },
+        { status: 400 }
+      );
+    }
+    const member = await MemberService.getMember(id);
     if (member) {
-      res.status(200).json(member);
+      return NextResponse.json(member);
     } else {
-      res.status(404).json({ message: 'Member not found' });
+      return NextResponse.json(
+        { message: 'Member not found' },
+        { status: 404 }
+      );
     }
   },
 
-  createMember: async (req: NextApiRequest, res: NextApiResponse) => {
-    const data: Prisma.memberCreateInput = req.body;
+  createMember: async (req: NextRequest) => {
+    const data: Prisma.memberCreateInput = await req.json();
     const member = await MemberService.createMember(data);
-    res.status(201).json(member);
+    return NextResponse.json(member, { status: 201 });
   },
 
-  updateMember: async (req: NextApiRequest, res: NextApiResponse) => {
-    const { id } = req.query;
-    const data: Prisma.memberUpdateInput = req.body;
-    const member = await MemberService.updateMember(id as string, data);
-    res.status(200).json(member);
+  updateMember: async (req: NextRequest) => {
+    const id = req.nextUrl.pathname.split('/').pop();
+    if (!id) {
+      return NextResponse.json(
+        { message: 'Member ID is required' },
+        { status: 400 }
+      );
+    }
+    const data: Prisma.memberUpdateInput = await req.json();
+    const member = await MemberService.updateMember(id, data);
+    return NextResponse.json(member);
   },
 
-  deleteMember: async (req: NextApiRequest, res: NextApiResponse) => {
-    const { id } = req.query;
-    const member = await MemberService.deleteMember(id as string);
-    res.status(200).json(member);
+  deleteMember: async (req: NextRequest) => {
+    const id = req.nextUrl.pathname.split('/').pop();
+    if (!id) {
+      return NextResponse.json(
+        { message: 'Member ID is required' },
+        { status: 400 }
+      );
+    }
+    const member = await MemberService.deleteMember(id);
+    return NextResponse.json(member);
   },
 };

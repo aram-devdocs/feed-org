@@ -1,3 +1,4 @@
-export * from './StyledButton';
-export * from './StyledTextField';
-export * from './StyledContainer';
+export * from './Button';
+export * from './TextField';
+export * from './Container';
+export * from './Form';

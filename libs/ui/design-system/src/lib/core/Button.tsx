@@ -1,7 +1,7 @@
-import { Button } from '@mui/material';
+import { Button as B } from '@mui/material';
 import styled from 'styled-components';
 
-export const StyledButton = styled(Button)`
+export const Button = styled(B)`
   background-color: #0070f3;
   color: #fff;
   padding: 8px 16px;

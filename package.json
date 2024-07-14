@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "node prepend-name.js nx run feed-org:dev",
-    "vercel-build": "node prepend-name.js nx run feed-org:build --skip-nx-cache",
+    "dev": "npx nx run feed-org:dev",
+    "vercel-build": "nx run feed-org:build --skip-nx-cache",
     "docker:start": "docker-compose -f infrastructure/docker-compose.postgres.yml up -d",
     "docker:stop": "docker-compose -f infrastructure/docker-compose.postgres.yml down",
-    "prisma:migrate": "node prepend-name.js npx prisma migrate dev --schema=libs/data-access/src/lib/prisma/schema.prisma",
-    "prisma:generate": "node prepend-name.js npx prisma generate --schema=libs/data-access/src/lib/prisma/schema.prisma",
-    "prisma:migrate:create-only": "node prepend-name.js npx prisma migrate dev --create-only --schema=libs/data-access/src/lib/schema.prisma",
+    "prisma:migrate": "npx prisma migrate dev --schema=libs/data-access/src/lib/prisma/schema.prisma",
+    "prisma:generate": "npx prisma generate --schema=libs/data-access/src/lib/prisma/schema.prisma",
+    "prisma:migrate:create-only": "npx prisma migrate dev --create-only --schema=libs/data-access/src/lib/prisma/schema.prisma",
     "prisma": "npm run prisma:migrate && npm run prisma:generate"
   },
   "private": true,

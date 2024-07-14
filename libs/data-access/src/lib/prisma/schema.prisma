@@ -20,7 +20,7 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model family {
+model family1 {
   family_id String @id @default(uuid()) @map("family_id") @db.VarChar(36) // Add @db.VarChar(36) to specify the column type as VARCHAR(36)
   name      String
 }

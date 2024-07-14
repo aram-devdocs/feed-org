@@ -8,7 +8,7 @@
 DROP TABLE "family";
 
 -- CreateTable
-CREATE TABLE "family" (
+CREATE TABLE "family1" (
     "family_id" VARCHAR(36) NOT NULL,
     "name" TEXT NOT NULL,
 
